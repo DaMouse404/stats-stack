@@ -7,7 +7,6 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y graphite-web graphite-carbon
 ln -fs $PWD/carbon/* /etc/carbon/
 ln -fs $PWD/graphite/graphite-carbon /etc/default/
 ln -fs $PWD/graphite/local_settings.py /etc/graphite/local_settings.py
-chown _graphite /var/lib/graphite -R
 
 service carbon-cache start
 
@@ -23,3 +22,5 @@ echo "Listen 2005" >> /etc/apache2/ports.conf
 service apache2 reload
 
 graphite-manage syncdb --noinput
+
+chown _graphite /var/lib/graphite -R
