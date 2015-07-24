@@ -3,8 +3,8 @@ set -e
 
 echo "deb https://packagecloud.io/grafana/stable/debian/ wheezy main" >> /etc/apt/sources.list.d/grafana.list
 curl https://packagecloud.io/gpg.key | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install grafana
+apt-get update
+apt-get install -y grafana
 
 grep '{' ./grafana/custom.ini > /dev/null
 if [[ $? != 1 ]]; then
@@ -12,5 +12,5 @@ if [[ $? != 1 ]]; then
 	exit 1
 fi
 
-ln -sf ./grafana/custom.ini /usr/share/grafana/conf/custom.ini
+ln -sf $PWD/grafana/custom.ini /usr/share/grafana/conf/custom.ini
 
