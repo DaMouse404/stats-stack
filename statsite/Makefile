@@ -3,14 +3,12 @@ RPMVERSION := 0.7.1
 
 SOURCEDIR = statsite-${VERSION}
 SOURCEBALL = ${VERSION}.tar.gz
+RPM=${SOURCEDIR}/rpm-build/statsite-${RPMVERSION}-1.el6.x86_64.rpm
 
-install: users
-	sudo rpm -i ${SOURCEDIR}/rpm-build/statsite-${RPMVERSION}-1.el6.x86_64.rpm
+install: users ${RPM}
+	sudo rpm -Uvh --replacepkgs ${RPM}
 	sudo cp influxdb.ini /etc/statsite
 	sudo cp statsite.conf /etc/statsite
-
-build: ${SOURCEDIR}
-	cd ${SOURCEDIR} && $(MAKE) rpms
 
 yum:
 	sudo yum install -y --enablerepo=epel scons monit check-devel
@@ -24,6 +22,9 @@ users:
 ${SOURCEDIR}:
 	curl -L https://github.com/armon/statsite/archive/${SOURCEBALL} -o ${SOURCEBALL}
 	tar zxf ${SOURCEBALL}
+
+${RPM}: ${SOURCEDIR}
+	cd ${SOURCEDIR} && $(MAKE) rpms
 
 clean:
 	rm -rf ${SOURCEDIR}

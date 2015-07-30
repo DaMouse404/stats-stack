@@ -1,5 +1,5 @@
 install:
-	cd statsite && $(MAKE) install
 
-clean:
-	cd statsite && $(MAKE) clean
+%:
+	$(MAKE) $(*) -C statsite
+	$(MAKE) $(*) -C influxdb
