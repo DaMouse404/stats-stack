@@ -1,3 +1,5 @@
+.PHONY: clean
+
 install:
 	sudo cp grafana.conf /etc/nginx/conf.d
 
