@@ -1,6 +1,6 @@
-VERSION := 2.0.2
+VERSION := 2.1.0-pre1
 
-RPM=grafana-${VERSION}-1.x86_64.rpm
+RPM=grafana-${VERSION}.x86_64.rpm
 
 install: ${RPM}
 ifneq (,$(findstring {,$(shell cat custom.ini)))
